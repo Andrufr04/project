@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1>API Feedback Controller</h1>
+    <button onclick="testGet()">GET</button>
+    <button onclick="testPost()">POST</button>
+    <button onclick="testPut()">PUT</button>
+    <button onclick="testPatch()">PATCH</button>
+    <button onclick="testDelete()">DELETE</button>
+    <p id="out"></p>
+    <script>
+        function testGet() {
+            fetch("/api/feedback", {
+                method: "GET",
+                headers: {
+                    "Connection": "close",
+                    "Accept": "application/json"
+                }
+            }).then(r => r.text())
+            .then(j => {
+                out.innerText = j
+            })
+        }
+        function testPost() {
+            fetch("/api/feedback", {
+                method: "POST"
+            }).then(r => r.json())
+            .then(j => {
+                out.innerHTML = ''
+                for (k in j) {
+                    out.innerHTML += `
+                    <div>
+                        <span">${k}:</span> 
+                        <span>${j[k]}</span>
+                    </div>`
+                }
+            })
+        }
+        function testPut() {
+            fetch("/api/feedback", {
+                method: "PUT"
+            }).then(r => r.json())
+            .then(j => {
+                out.innerHTML = ''
+                for (k in j) {
+                    out.innerHTML += `
+                    <div>
+                        <span>${k}:</span> 
+                        <span>${j[k]}</span>
+                    </div>`
+                }
+            })
+        }
+        function testPatch() {
+            fetch("/api/feedback", {
+                method: "PATCH"
+            }).then(r => r.json())
+            .then(j => {
+                out.innerHTML = ''
+                for (k in j) {
+                    out.innerHTML += `
+                    <div>
+                        <span>${k}:</span> 
+                        <span>${j[k]}</span>
+                    </div>`
+                }
+            })
+        }
+        function testDelete() {
+            fetch("/api/feedback", {
+                method: "DELETE"
+            }).then(r => r.json())
+            .then(j => {
+                out.innerHTML = ''
+                for (k in j) {
+                    out.innerHTML += `
+                    <div>
+                        <span>${k}:</span> 
+                        <span>${j[k]}</span>
+                    </div>`
+                }
+            })
+        }
+    </script>
+</body>
+</html>
